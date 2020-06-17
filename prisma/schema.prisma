@@ -32,11 +32,12 @@ model Roles {
 }
 
 model User {
-  admin   Boolean? @default(false)
-  email   String   @unique
-  id      Int      @default(autoincrement()) @id
-  name    String?
-  posts   Post[]
-  profile Profile?
-  roles   Roles[]
+  admin    Boolean? @default(false)
+  email    String   @unique
+  id       Int      @default(autoincrement()) @id
+  name     String?
+  password String?
+  posts    Post[]
+  profile  Profile?
+  roles    Roles[]
 }

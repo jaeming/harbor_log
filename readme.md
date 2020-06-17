@@ -81,7 +81,9 @@
   ```
 
 - set up the dev server:
+
   - install ts-node-dev
+
     - `yarn add ts-node-dev -D` or `npm install ts-node-dev -D`
     - in your package.json add a script sections:
 
@@ -105,3 +107,12 @@ query {
 ```
 
 You'll notice you can autocomplete (press ctrl-space to give you initial auto-complete options).
+
+##Notes
+
+###TODO
+
+- write docs prisma and db and migrations (for example):
+  - db command: `psql -h localhost -d harbor -U benji -f ./migrations/2020-06-10-2242-add_roles_to_user.sql`
+  - introspect: `npx prisma introspect`
+  - regen client: `npx prisma generate`
