@@ -8,7 +8,7 @@ class PolicyDirective extends SchemaDirectiveVisitor {
 
     field.resolve = function (...args) {
       const { user } = args[2] || { user: { roles: [] } }
-      const authorized = user.admin || user.roles.includes(requires)
+      const authorized = user.admin || user.roles.map(i => i.name).includes(requires)
       if (!authorized) throw new Error(`Not Authorized: ${requires}`)
 
       return resolver.apply(this, args)

@@ -49,13 +49,20 @@ export default gql`
     published: Boolean
   }
 
+  input UserInput {
+    email: String!
+    name: String
+    password: String!
+  }
+
   type Query {
-    users: [User!],
-    posts: [Post!],
+    users: [User!]
+    posts: [Post!]
     post(id: Int!): Post
   }
 
   type Mutation {
     postCreate(input: PostInput!): Post @policy(requires: postWrite)
+    userCreate(input: UserInput!): String # jwt token
   }
 `

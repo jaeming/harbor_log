@@ -1,11 +1,13 @@
 import { post as Post } from '../../config/prisma_client'
-import { Policy } from '../../policies/types'
+import { canPublish } from '../../policies'
 
-export const postCreate = async (_, { input }, { user }) => {
+export const postCreate = (_, { input }, { user }) => {
+  if (!user) return
+
   return Post.create({
     data: {
       ...input,
-      published: user.roles.includes(Policy.postPublish) ? input.published : false,
+      published: canPublish(user.roles) ? input.published : false,
       author: { connect: { id: user!.id } }
     },
     include: { author: true }

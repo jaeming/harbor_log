@@ -3,10 +3,7 @@ import jwt from 'jsonwebtoken'
 // import bcrypt from 'bcryptjs'
 
 export const sign = ({ id }) => {
-  return jwt.sign({ id }, process.env.HARBOR, (err, token) => {
-    if (err) throw new Error(err)
-    return token
-  })
+  return jwt.sign({ id }, process.env.HARBOR)
 }
 
 const decode = (token) => {
@@ -22,5 +19,7 @@ const fetchUser = (id) => {
 
 export const currentUser = (req) => {
   const { headers: { auth } } = req
+  if (!auth) return
+
   return fetchUser(decode(auth))
 }
