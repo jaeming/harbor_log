@@ -1,5 +1,6 @@
 import { users } from './users/users'
-import { userCreate } from './users/create'
+import { register } from './users/register'
+import { login } from './users/login'
 import { posts } from './posts/posts'
 import { post } from './posts/post'
 import { postCreate } from './posts/create'
@@ -12,7 +13,8 @@ export default {
   },
 
   Mutation: {
-    postCreate,
-    userCreate
+    register,
+    login,
+    postCreate
   }
 }

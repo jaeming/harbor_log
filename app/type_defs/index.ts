@@ -2,6 +2,7 @@ import { gql } from 'apollo-server'
 
 export default gql`
   enum Permission {
+    userRead
     commentRead
     commentWrite
     postWrite
@@ -49,20 +50,26 @@ export default gql`
     published: Boolean
   }
 
-  input UserInput {
+  input RegisterInput {
     email: String!
     name: String
     password: String!
   }
 
+  input LoginInput {
+    email: String!
+    password: String!
+  }  
+
   type Query {
-    users: [User!]
+    users: [User!] @policy(requires: userRead)
     posts: [Post!]
     post(id: Int!): Post
   }
 
   type Mutation {
+    register(input: RegisterInput!): String
+    login(input: LoginInput!): String
     postCreate(input: PostInput!): Post @policy(requires: postWrite)
-    userCreate(input: UserInput!): String # jwt token
   }
 `
