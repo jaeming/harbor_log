@@ -1,36 +1,26 @@
 import { user } from './config/prisma_client'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import * as util from 'util'
 
 export const sign = ({ id }) => {
   return jwt.sign({ id }, process.env.HARBOR)
 }
 
-const decode = async (token) => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, process.env.HARBOR, (err, decoded) => {
-      if (err) reject(err)
-      resolve(decoded.id)
-    })
-  })
+const decode = async (token: string) => {
+  const verifyToken = util.promisify(jwt.verify)
+  const decoded = await verifyToken(token, process.env.HARBOR)
+  return decoded.id
 }
 
 export const salt = (password: string) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, 8, function (err, hash) {
-      if (err) reject(err)
-      resolve(hash)
-    })
-  })
+  const hashPassword = util.promisify(bcrypt.hash)
+  return hashPassword(password, 8)
 }
 
 export const compare = (password: string, hash: string) => {
-  return new Promise((resolve, reject) => {
-    return bcrypt.compare(password, hash, function (err, res) {
-      if (err) reject(err)
-      resolve(res)
-    })
-  })
+  const comparePassword = util.promisify(bcrypt.compare)
+  return comparePassword(password, hash)
 }
 
 const fetchUser = (id) => {
