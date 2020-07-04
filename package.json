@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node ./dist",
+    "start": "npx tsc && node ./dist",
     "dev": "ts-node-dev --poll ./app",
     "db:gui": "npx prisma studio --experimental",
     "db:introspect": "npx prisma introspect",
