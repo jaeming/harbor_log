@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "tsc && node ./dist",
     "dev": "ts-node-dev --poll ./app",
     "db:gui": "npx prisma studio --experimental",
     "db:introspect": "npx prisma introspect",
@@ -30,5 +31,8 @@
     "bcryptjs": "^2.4.3",
     "graphql": "^15.1.0",
     "jsonwebtoken": "^8.5.1"
+  },
+  "engines": {
+    "node": "14.0.0"
   }
 }
