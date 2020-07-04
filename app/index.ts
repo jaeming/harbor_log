@@ -9,7 +9,8 @@ const server = new ApolloServer({
   typeDefs,
   context: async ({ req }) => ({ user: await currentUser(req) }),
   schemaDirectives: { policy: PolicyDirective },
-  playground: true
+  playground: true,
+  introspection: true
 })
 
 const port = process.env.PORT || 4000
