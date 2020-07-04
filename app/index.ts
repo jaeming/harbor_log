@@ -8,7 +8,10 @@ const server = new ApolloServer({
   resolvers,
   typeDefs,
   context: async ({ req }) => ({ user: await currentUser(req) }),
-  schemaDirectives: { policy: PolicyDirective }
+  schemaDirectives: { policy: PolicyDirective },
+  playground: true
 })
 
-server.listen().then(({ url }) => console.log(`Server ready at ${url}.`))
+const port = process.env.PORT || 4000
+
+server.listen({ port }).then(({ url }) => console.log(`Server ready at ${url}.`))
