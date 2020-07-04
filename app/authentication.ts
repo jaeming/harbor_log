@@ -1,16 +1,16 @@
-import { user } from './config/prisma_client'
+import { user as User } from './config/prisma_client'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import * as util from 'util'
 
-export const sign = ({ id }) => {
-  return jwt.sign({ id }, process.env.HARBOR)
+export const sign = (user) => {
+  return jwt.sign(user, process.env.HARBOR)
 }
 
 const decode = async (token: string) => {
   const verifyToken = util.promisify(jwt.verify)
   const decoded = await verifyToken(token, process.env.HARBOR)
-  return decoded.id
+  return decoded
 }
 
 export const salt = (password: string) => {
@@ -23,14 +23,14 @@ export const compare = (password: string, hash: string) => {
   return comparePassword(password, hash)
 }
 
-const fetchUser = (id) => {
-  return user.findOne({ where: { id }, include: { roles: true } })
+const fetchUser = ({ id }) => {
+  return User.findOne({ where: { id }, include: { roles: true } })
 }
 
 export const currentUser = async (req) => {
   const { headers: { auth } } = req
   if (!auth) return
 
-  const token = await decode(auth)
-  return fetchUser(token)
+  const user = await decode(auth)
+  return fetchUser(user)
 }

@@ -16,7 +16,11 @@ export const register = async (_, { input }) => {
       roles: {
         create: DEFAULT_POLICIES
       }
-    }
+    },
+    include: { roles: { select: { name: true } } }
   })
-  if (user) return sign(user)
+  if (user) {
+    delete user.password
+    return sign(user)
+  }
 }
