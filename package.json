@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "./node_modules/.bin/tsc && node ./dist",
+    "start": "yarn build && node ./dist",
     "dev": "ts-node-dev --poll ./app",
+    "build": "./node_modules/.bin/tsc",
     "db:gui": "npx prisma studio --experimental",
     "db:introspect": "npx prisma introspect",
     "db:client:generate": "prisma generate"
