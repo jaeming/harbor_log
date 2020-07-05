@@ -6,11 +6,13 @@
   "scripts": {
     "start": "node ./dist",
     "dev": "ts-node-dev --poll ./app",
-    "postinstall": "yarn build",
+    "postinstall": "yarn build && yarn db:migrate",
     "build": "tsc",
+    "db:migrate:generate": "npx prisma migrate save --experimental",
+    "db:migrate": "npx prisma migrate up --experimental",
     "db:gui": "npx prisma studio --experimental",
     "db:introspect": "npx prisma introspect",
-    "db:client:generate": "prisma generate"
+    "db:client:generate": "npx prisma generate"
   },
   "devDependencies": {
     "@prisma/cli": "^2.0.1",
