@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Permission } from '@prisma/client'
 
-const prisma = new PrismaClient()
-export const { user, post, roles } = prisma
+const { user, post } = new PrismaClient()
+export { Permission, user, post }

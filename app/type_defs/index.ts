@@ -26,13 +26,7 @@ export default gql`
     name: String
     profile: Profile
     posts: [Post!]
-    roles: [Role!]!
-  }
-
-  type Role {
-    id: Int!
-    name: Permission!
-    user: User!
+    roles: [Permission!]!
   }
 
   type Post {

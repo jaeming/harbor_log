@@ -4,8 +4,7 @@ export const users = () => {
   return User.findMany({
     include: {
       posts: { include: { author: true } },
-      profile: true,
-      roles: true
+      profile: true
     }
   })
 }

@@ -1,0 +1,26 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "Permission",
+      "values": [
+        "userRead",
+        "commentRead",
+        "commentWrite",
+        "postWrite",
+        "postPublish"
+      ]
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "Roles"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "User",
+      "field": "roles",
+      "type": "Permission"
+    }
+  ]
+}

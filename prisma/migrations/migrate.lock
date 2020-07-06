@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20200704233036-create-users--roles--posts--comments
+20200705230256-replace-roles-with-enum

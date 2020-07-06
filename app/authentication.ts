@@ -24,7 +24,7 @@ export const compare = (password: string, hash: string) => {
 }
 
 const fetchUser = ({ id }) => {
-  return User.findOne({ where: { id }, include: { roles: true } })
+  return User.findOne({ where: { id } })
 }
 
 export const currentUser = async (req) => {

@@ -1,11 +1,5 @@
-import { user as User } from '../../config/prisma_client'
-import { Policy } from '../../policies/types'
+import { user as User, Permission } from '../../config/prisma_client'
 import { sign, salt } from '../../authentication'
-
-const DEFAULT_POLICIES = [
-  { name: Policy.commentRead },
-  { name: Policy.commentWrite }
-]
 
 export const register = async (_, { input }) => {
   const password = await salt(input.password)
@@ -14,10 +8,9 @@ export const register = async (_, { input }) => {
       ...input,
       password,
       roles: {
-        create: DEFAULT_POLICIES
+        set: [Permission.commentRead, Permission.commentWrite]
       }
-    },
-    include: { roles: { select: { name: true } } }
+    }
   })
   if (user) {
     delete user.password
