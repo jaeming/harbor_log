@@ -4,6 +4,7 @@ import { login } from './users/login'
 import { posts } from './posts/posts'
 import { post } from './posts/post'
 import { postCreate } from './posts/create'
+import { postDelete } from './posts/delete'
 
 export default {
   Query: {
@@ -15,6 +16,7 @@ export default {
   Mutation: {
     register,
     login,
-    postCreate
+    postCreate,
+    postDelete
   }
 }
