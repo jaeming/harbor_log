@@ -44,10 +44,6 @@ export default gql`
     published: Boolean
   }
 
-  input PostDeleteInput {
-    id: Int!
-  }
-
   input RegisterInput {
     email: String!
     name: String
@@ -69,6 +65,7 @@ export default gql`
     register(input: RegisterInput!): String
     login(input: LoginInput!): String
     postCreate(input: PostInput!): Post @policy(requires: postWrite)
-    postDelete(input: PostDeleteInput!): Post @policy(requires: postWrite)
+    postUpdate(input: PostInput!, id: Int!): Post @policy(requires: postWrite)
+    postDelete(id: Int!): Post @policy(requires: postWrite)
   }
 `
